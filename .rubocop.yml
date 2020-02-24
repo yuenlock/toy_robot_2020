@@ -1,0 +1,20 @@
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - spec
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - spec/**/*
+
+AllCops:
+  Exclude:
+    - Gemfile
+    - Guardfile
