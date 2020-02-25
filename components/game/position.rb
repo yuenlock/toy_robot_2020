@@ -7,7 +7,7 @@ module Game
     def initialize(x:, y:, facing:) # rubocop:disable Naming/MethodParameterName
       @x = x.to_i
       @y = y.to_i
-      @facing = DIRECTIONS.index(facing) || facing.to_i # defaults to 0/NORTH
+      @facing = DIRECTIONS.index(facing) || facing.to_i % DIRECTIONS_SIZE # defaults to 0/NORTH
     end
 
     def move

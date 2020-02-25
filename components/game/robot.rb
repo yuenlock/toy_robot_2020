@@ -32,6 +32,10 @@ module Game
       update_position(new_pos) if validate_position(new_pos)
     end
 
+    def report
+      current_position.report
+    end
+
     private
 
     def update_position(position)

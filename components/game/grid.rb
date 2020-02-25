@@ -4,7 +4,7 @@ module Game
   class Grid
     attr_reader :max_x, :max_y
 
-    def initialize(size_x:, size_y:)
+    def initialize(size_x: 5, size_y: 5)
       @max_x = size_x - 1
       @max_y = size_y - 1
     end
