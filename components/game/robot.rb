@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './errors.rb'
+
 module Game
   class Robot
     attr_reader :grid, :current_position
@@ -10,7 +12,9 @@ module Game
     end
 
     def place(position:)
-      update_position(position) if validate_position(position, InvalidPlacementError)
+      raise InvalidPlacementError unless validate_position(position)
+
+      update_position position
     end
 
     def left
@@ -21,14 +25,21 @@ module Game
       placed? && update_position(current_position.right)
     end
 
+    def move
+      return unless placed?
+
+      new_pos = current_position.move
+      update_position(new_pos) if validate_position(new_pos)
+    end
+
     private
 
     def update_position(position)
       @current_position = position
     end
 
-    def validate_position(position, error_class = InvalidMoveError)
-      grid.valid_position?(position) || raise(error_class)
+    def validate_position(position)
+      grid.valid_position?(position)
     end
 
     def placed?
@@ -37,14 +48,3 @@ module Game
   end
 end
 
-class InvalidPlacementError < StandardError
-  def message
-    'Please place the robot in a valid position within the grid.'
-  end
-end
-
-class InvalidMoveError < StandardError
-  def message
-    'Please move the robot to a valid position within the grid.'
-  end
-end

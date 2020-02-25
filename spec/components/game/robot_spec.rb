@@ -1,4 +1,5 @@
 require './components/game/robot.rb'
+require './components/game/errors.rb'
 
 RSpec.describe Game::Robot do
   let(:grid) { instance_double 'Game::Grid' }
@@ -25,7 +26,35 @@ RSpec.describe Game::Robot do
       end
 
       it 'raises error' do
-        expect { robot.place(position: init_position) }.to raise_error InvalidPlacementError
+        expect { robot.place(position: init_position) }.to raise_error Game::InvalidPlacementError
+      end
+    end
+  end
+
+  describe '#move' do
+    context 'valid position' do
+      before do
+        allow(grid).to receive(:valid_position?).and_return true
+        expect(init_position).to receive(:move).and_return new_position
+
+        robot.move
+      end
+
+      it 'stays in place' do
+        expect(robot.current_position).to eq new_position
+      end
+    end
+
+    context 'bad position' do
+      before do
+        allow(grid).to receive(:valid_position?).with(new_position).and_return false
+        expect(init_position).to receive(:move).and_return new_position
+
+        robot.move
+      end
+
+      it 'stays in place' do
+        expect(robot.current_position).to eq init_position
       end
     end
   end
