@@ -45,5 +45,16 @@ RSpec.describe Game::Robot do
         expect(robot.current_position).to eq new_position
       end
     end
+
+    describe '#right' do
+      before do
+        expect(init_position).to receive(:right).and_return new_position
+        robot.right
+      end
+
+      it 'updates position' do
+        expect(robot.current_position).to eq new_position
+      end
+    end
   end
 end
