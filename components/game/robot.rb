@@ -17,22 +17,22 @@ module Game
       update_position position
     end
 
-    def left
+    def left(_params = nil)
       placed? && update_position(current_position.left)
     end
 
-    def right
+    def right(_params = nil)
       placed? && update_position(current_position.right)
     end
 
-    def move
+    def move(_params = nil)
       return unless placed?
 
       new_pos = current_position.move
-      update_position(new_pos) if validate_position(new_pos)
+      validate_position(new_pos) && update_position(new_pos)
     end
 
-    def report
+    def report(_params = nil)
       current_position.report
     end
 
@@ -40,6 +40,7 @@ module Game
 
     def update_position(position)
       @current_position = position
+      nil
     end
 
     def validate_position(position)
@@ -51,4 +52,3 @@ module Game
     end
   end
 end
-
