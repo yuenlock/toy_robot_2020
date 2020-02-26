@@ -4,13 +4,13 @@ module Game
   class RobotControl
     VALID_COMMANDS = %w[place move left right report].freeze
 
-    def self.call(robot:, commands:)
-      new(robot: robot, commands: commands).process
+    def self.call(robot:, commands:, position_class:)
+      new(robot: robot, commands: commands, position_class: position_class).process
     end
 
     attr_reader :robot, :commands, :params, :position_class
 
-    def initialize(robot:, commands:, position_class: Game::Position)
+    def initialize(robot:, commands:, position_class:)
       @robot = robot
       @commands = commands
       @params = params

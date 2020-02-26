@@ -10,11 +10,11 @@ RSpec.describe Game::RobotControl do
     let(:params) { 'some_params' }
     let(:commands) { ['PLACE 1,2,3', 'MOVE'] }
     let(:instance) { instance_double described_class }
-    subject { described_class.call(robot: robot, commands: commands) }
+    subject { described_class.call(robot: robot, commands: commands, position_class: position_class) }
 
     it 'returns the robot' do
       expect(described_class).to(
-        receive(:new).with(robot: robot, commands: commands)
+        receive(:new).with(robot: robot, commands: commands, position_class: position_class)
                      .and_return(instance)
       )
       expect(instance).to receive(:process).and_return robot

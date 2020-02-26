@@ -4,8 +4,9 @@ RSpec.describe 'RobotControl' do
   let(:grid) { Game::Grid.new }
   let(:position) { Game::Position.new(x: 1, y: 2, facing: 0) }
   let(:robot) { Game::Robot.new(grid: grid, position: position) }
+  let(:position_class) { Game::Position }
 
-  subject { Game::RobotControl.call(**command_args) }
+  subject { Game::RobotControl.call(**command_args.merge(position_class: position_class)) }
 
   context 'place, move' do
     let(:command_args) { { robot: robot, commands: ['PLACE 0,1,NORTH', 'MOVE', 'REPORT'] } }
