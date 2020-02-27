@@ -15,7 +15,8 @@ RSpec.describe IOHandlers::FileInput do
 
     context 'bad filename' do
       let(:filename) { 'bad_file/path' }
-      it { expect(subject).to eq described_class::ERROR_MESSAGE }
+
+      it { expect { subject }.to raise_error(IOHandlers::InvalidFileError) }
     end
   end
 end

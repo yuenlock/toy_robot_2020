@@ -3,12 +3,11 @@
 module IOHandlers
   class FileInput
     VALID_ACTIONS = %w[PLACE MOVE REPORT LEFT RIGHT].freeze
-    ERROR_MESSAGE = 'Error: Invalid filename'
 
     def self.call(filename:)
-      return ERROR_MESSAGE unless valid_file?(filename)
+      raise InvalidFileError unless valid_file?(filename)
 
-      parse_lines read_file(filename)
+      parse_lines(read_file(filename))
     end
 
     class << self
@@ -27,8 +26,14 @@ module IOHandlers
       end
 
       def valid_file?(filename)
-        File.exist?(filename)
+        File.exist? filename
       end
+    end
+  end
+
+  class InvalidFileError < StandardError
+    def message
+      'Error: File could not be found. Please provide a valid file.'
     end
   end
 end

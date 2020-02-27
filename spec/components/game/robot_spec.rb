@@ -86,4 +86,23 @@ RSpec.describe Game::Robot do
       end
     end
   end
+
+  describe '#report' do
+    context 'valid position' do
+      let(:position_string) { '1,2,WEST' }
+      before do
+        allow(init_position).to receive(:report).and_return position_string
+      end
+
+      it { expect(robot.report).to eq position_string }
+    end
+
+    context 'bad position' do
+      before do
+        allow(robot).to receive(:current_position).and_return nil
+      end
+
+      it { expect { robot.report }.to raise_error(Game::InvalidPlacementError) }
+    end
+  end
 end

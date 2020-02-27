@@ -11,10 +11,10 @@ module Game
       @current_position = position
     end
 
-    def place(position:)
-      raise InvalidPlacementError unless validate_position(position)
+    def place(params)
+      raise InvalidPlacementError unless validate_position(params[:position])
 
-      update_position position
+      update_position params[:position]
     end
 
     def left(_params = nil)
@@ -33,7 +33,7 @@ module Game
     end
 
     def report(_params = nil)
-      current_position.report
+      placed? && current_position.report
     end
 
     private
