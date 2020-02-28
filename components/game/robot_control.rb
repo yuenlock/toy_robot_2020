@@ -25,7 +25,6 @@ module Game
     private
 
     def execute(action, params)
-      # robot.send(command[:action], parse_params(command))
       robot.send(action, params)
     end
 

@@ -8,10 +8,19 @@ module Game
   class Position
     attr_reader :x, :y, :facing
 
+    # x and y:
+    #   - integer value of param if param is a number
+    #   - value of the first numeric characters of the param if param is a string
+    #   - 0 if param is a string starting with a non-digit
+    #
+    # facing
+    #   - a uppercase string matching the 4 main compass directions
+    #   - a number (including -ve), which will be adjusted to the 4 directions
+    #   - an unknown string or negative defaults to 0 if for a unrecognised value
     def initialize(x:, y:, facing:) # rubocop:disable Naming/MethodParameterName
       @x = x.to_i
       @y = y.to_i
-      @facing = DIRECTIONS.index(facing) || facing.to_i % DIRECTIONS_SIZE # defaults to 0/NORTH
+      @facing = DIRECTIONS.index(facing) || facing.to_i % DIRECTIONS_SIZE
     end
 
     def move
@@ -36,7 +45,7 @@ module Game
     private
 
     def rotate(turn)
-      new_facing = (DIRECTIONS_SIZE + facing + turn) % DIRECTIONS_SIZE
+      new_facing = (facing + turn) % DIRECTIONS_SIZE
 
       new_position(new_facing: new_facing)
     end
