@@ -18,11 +18,16 @@ module Game
     end
 
     def process
-      valid_commands.map { |command| robot.send(command[:action], parse_params(command)) }
+      valid_commands.map { |command| execute(command[:action], parse_params(command)) }
                     .select { |result| result }
     end
 
-    # private
+    private
+
+    def execute(action, params)
+      # robot.send(command[:action], parse_params(command))
+      robot.send(action, params)
+    end
 
     def parse_params(command)
       { position: parse_position(command[:params]) } if command[:action] == 'place' && command[:params]

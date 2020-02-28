@@ -1,4 +1,5 @@
 require './components/io_handlers/file_input.rb'
+require './components/io_handlers/errors.rb'
 
 RSpec.describe IOHandlers::FileInput do
   let(:strings) { ['PLACE 0,0,NORTH', 'MOVE', 'REPORT'] }

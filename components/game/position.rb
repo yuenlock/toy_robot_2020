@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module Game
+  MOVEMENT = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: 0, y: -1 }, { x: -1, y: 0 }].freeze
+  DIRECTIONS = %w[NORTH EAST SOUTH WEST].freeze
+  DIRECTIONS_SIZE = DIRECTIONS.count
+
   class Position
     attr_reader :x, :y, :facing
 
@@ -11,7 +15,10 @@ module Game
     end
 
     def move
-      new_position(new_x: x + MOVEMENT[facing][:x], new_y: y + MOVEMENT[facing][:y])
+      new_x = x + MOVEMENT[facing][:x]
+      new_y = y + MOVEMENT[facing][:y]
+
+      new_position(new_x: new_x, new_y: new_y)
     end
 
     def left
@@ -29,15 +36,13 @@ module Game
     private
 
     def rotate(turn)
-      new_position(new_facing: (DIRECTIONS_SIZE + facing + turn) % DIRECTIONS_SIZE)
+      new_facing = (DIRECTIONS_SIZE + facing + turn) % DIRECTIONS_SIZE
+
+      new_position(new_facing: new_facing)
     end
 
     def new_position(new_x: x, new_y: y, new_facing: facing)
       Position.new(x: new_x, y: new_y, facing: new_facing)
     end
   end
-
-  MOVEMENT = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: 0, y: -1 }, { x: -1, y: 0 }].freeze
-  DIRECTIONS = %w[NORTH EAST SOUTH WEST].freeze
-  DIRECTIONS_SIZE = DIRECTIONS.count
 end

@@ -26,9 +26,8 @@ module Game
     end
 
     def move(_params = nil)
-      return unless placed?
+      new_pos = placed? && current_position.move
 
-      new_pos = current_position.move
       validate_position(new_pos) && update_position(new_pos)
     end
 
