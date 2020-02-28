@@ -58,25 +58,3 @@ REPORT
 Output: 3,3,NORTH
 ```
 
-## Deliverables
-
-The source files, the test data and any test code (as well as explanations of how to run everything).
-
-## Expectations
-
-We're not just looking for any old solution that would solve the problem. We're looking for:
-
-- production quality code
-- good OO or functional practices
-- a solid testing approach
-- well thought out naming
-- solid error handling
-- extensibility/maintainability/\*ility
-- good design
-- separation of concerns
-- sensible breakdown of code into files/modules
-- use of best practices when it comes to JS, CSS, testing etc.
-- appropriate use of tools/frameworks
-- etc
-
-Basically treat the coding test as if it's part of a larger problem.
