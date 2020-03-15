@@ -19,11 +19,11 @@ For very large input file with lots of commands
 input should be either:
 - `IOHandlers::FileInput` (default),
 - `IOHandlers::JsonInput`,
-- `IOHandlers::StdInput`
+- `IOHandlers::StdInput` (enter `DONE` after the last command)
 
 output is (only one option for now) `IOHandlers::GenericOutput`
 
-output_filename is `full/path/to/text_file`
+output_file is `full/path/to/text_file`
 
 ### Command file format
 Contents of the file should be in the format of
