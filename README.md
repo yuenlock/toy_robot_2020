@@ -8,9 +8,22 @@ To setup, ensure you have Ruby 2.7.0, clone this repository and then run
     bundle install
 
 ### Play
-To run
+To run with regular inputs
 
-    ruby bin/robot_cli.rb <filename>
+    ruby bin/robot_cli.rb <input_file> <input:optional> <output:optional> <output_file:optional>
+
+For very large input file with lots of commands
+
+    ruby bin/robot_cli_large_file.rb <input_file>
+
+input should be either:
+- `IOHandlers::FileInput` (default),
+- `IOHandlers::JsonInput`,
+- `IOHandlers::StdInput`
+
+output is (only one option for now) `IOHandlers::GenericOutput`
+
+output_filename is `full/path/to/text_file`
 
 ### Command file format
 Contents of the file should be in the format of
@@ -41,13 +54,13 @@ Below is the content of a sample file (found in `./spec/data/03_more_steps_and_o
     LEFT
     MOVE
     REPORT
-   
+
 And the output will be
 
     3,3,NORTH
-    
+
 More sample command files are in the `./spec/data` directory
- 
+
 ### Tests
 To run tests
 
