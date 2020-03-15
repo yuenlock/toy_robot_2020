@@ -7,4 +7,5 @@ require_relative './io_handlers/large_file_input.rb'
 require_relative './io_handlers/json_input.rb'
 require_relative './io_handlers/std_input.rb'
 
+require_relative './io_handlers/generic_output.rb'
 require_relative './io_handlers/screen_output.rb'
