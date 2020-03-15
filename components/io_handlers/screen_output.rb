@@ -2,12 +2,8 @@
 
 module IOHandlers
   class ScreenOutput
-    def self.show(lines)
-      puts
-
+    def self.call(lines)
       lines.each { |line| puts line }
-
-      puts
     end
   end
 end

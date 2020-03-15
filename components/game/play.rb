@@ -2,10 +2,10 @@
 
 module Game
   class Play
-    def self.call(commands:)
+    def self.call(commands:, robot: Robot.new(grid: Grid.new))
       RobotControl.call(
         commands: commands,
-        robot: Robot.new(grid: Grid.new),
+        robot: robot,
         position_class: Position
       )
     end

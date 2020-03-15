@@ -9,9 +9,9 @@ class RobotCLI
   def self.call(filename:)
     commands = IOHandlers::FileInput.call(filename: filename)
 
-    IOHandlers::ScreenOutput.show Game::Play.call(commands: commands)
+    IOHandlers::ScreenOutput.call Game::Play.call(commands: commands)
   rescue StandardError => e
-    IOHandlers::ScreenOutput.show [e.message]
+    IOHandlers::ScreenOutput.call [e.message]
   end
 end
 
