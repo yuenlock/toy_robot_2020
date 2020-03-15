@@ -6,13 +6,20 @@ require './components/game.rb'
 require './components/io_handlers.rb'
 
 class RobotCLI
-  def self.call(filename:)
-    commands = IOHandlers::FileInput.call(filename: filename)
+  DEFAULT_HANDLERS = {
+    output_handler: IOHandlers::ScreenOutput,
+    input_handler: IOHandlers::FileInput
+  }.freeze
 
-    IOHandlers::ScreenOutput.call Game::Play.call(commands: commands)
+  def self.call(filename:, input_handler: nil, output_handler: nil)
+    input_handler = input_handler ? Object.const_get(input_handler) : DEFAULT_HANDLERS[:input_handler]
+    output_handler  = DEFAULT_HANDLERS[:output_handler]
+    commands = input_handler.call(filename: filename)
+
+    output_handler.call Game::Play.call(commands: commands)
   rescue StandardError => e
-    IOHandlers::ScreenOutput.call [e.message]
+    output_handler.call [e.message]
   end
 end
 
-RobotCLI.call(filename: ARGV.first)
+RobotCLI.call(filename: ARGV[0], input_handler: ARGV[1], output_handler: ARGV[2])
